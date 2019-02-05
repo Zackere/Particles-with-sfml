@@ -11,6 +11,7 @@ git clone https://github.com/Zackere/Particles-with-sfml
 In order to compile this project, makefile should be modified as follows:
 - change CC variable to your favourite compiler,
 - change SFML variable to path to SFML install path.
+
 When you're done, go to the folder with cloned project and simply type:
 ```
 $ make

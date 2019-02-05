@@ -1,5 +1,5 @@
 # Particles with SFML
-This project is focused on learning what SFML library has to offer.
+This project is focused on learning what SFML library has to offer. The app shows system of particles moving in a very interesting way.
 
 ## Download this project
 To download this project, simply clone this repo:

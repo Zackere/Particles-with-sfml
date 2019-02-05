@@ -21,6 +21,11 @@ After you're done, type:
 $ make clean
 ```
 to clean up junk files.
+## Running the app
+To run the app, launch your favourite Desktop enviroment, console, go to the project folder and type:
+```
+$ ./sfml-app
+```
 
 ## Authors
 Wojciech Replin. Email me at: wo1001@wp.pl

@@ -1,7 +1,7 @@
 CC=clang++
-CFLAGS=-Wall -Werror -pedantic -std=c++14 #-fsanitize=shift,integer-divide-by-zero,unreachable,vla-bound,null,return,signed-integer-overflow,address
-LFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
 SFML=/usr/local
+CFLAGS=-Wall -Werror -pedantic -std=c++14 -fsanitize=shift,integer-divide-by-zero,unreachable,vla-bound,null,return,signed-integer-overflow,address
+LFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
 TARGET=sfml-app
 FILES=main.o particle.o
 

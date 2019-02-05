@@ -13,11 +13,11 @@ In order to compile this project, makefile should be modified as follows:
 - change SFML variable to path to SFML install path.
 When you're done, go to the folder with cloned project and simply type:
 ```
-make
+$ make
 ```
 After you're done, type:
 ```
-make clean
+$ make clean
 ```
 to clean up junk files.
 

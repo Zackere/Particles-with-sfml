@@ -5,7 +5,6 @@ LFLAGS=-lsfml-graphics -lsfml-window -lsfml-system -lc++
 TARGET=sfml-app
 FILES=main.o particle.o
 
-
 ${TARGET}: ${FILES}
 	${CC} ${FILES} -o ${TARGET} -L${SFML}/lib ${LFLAGS}
 

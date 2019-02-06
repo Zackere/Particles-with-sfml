@@ -64,16 +64,14 @@ int main()
 	initparticles(vparticles, w_width, w_heigth);
 
 	sf::RenderWindow window(sf::VideoMode(w_width,w_heigth), "Particles");
-
 	while(window.isOpen())
 	{
-		drawparticles(vparticles, window, [](const Particle &p){
-				return sf::Color::Black; });
+		drawparticles(vparticles, window, [](const Particle &p){ return sf::Color::Black; });
 		applyforce(vparticles, sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 		drawparticles(vparticles, window, [&window](const Particle &p){
 				double rx = sf::Mouse::getPosition(window).x - p.getxpos();
 				double ry = sf::Mouse::getPosition(window).y - p.getypos();
-				double r = 8 * sqrt(rx*rx + ry*ry);
+				double r = sqrt(rx*rx + ry*ry);
 				double b = 0;
 				if( r>255 )
 				{
@@ -82,17 +80,11 @@ int main()
 					r = 255;
 				}
 				return sf::Color(255,r,b); });
-		//std::cout<<sf::Mouse::getPosition().x<<std::endl;
-		//std::cout<<sf::Mouse::getPosition().y<<std::endl<<std::endl;
 
 		sf::Event event;
 		while(window.pollEvent(event))
-		{
-			if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-			{
+			if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) 
 				window.close();
-			}
-		}
 		window.display();
 	}
 	return 0;

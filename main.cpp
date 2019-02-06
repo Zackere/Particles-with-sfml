@@ -5,6 +5,7 @@
 #include <utility>
 #include <math.h>
 #include <random>
+#include <functional>
 
 #include "particle.h"
 
@@ -17,7 +18,7 @@ void initparticles(std::vector<Particle> &v, int width, int heigth)
 	for(int i=0; i< width * heigth; i++)
 		positions[i] = i;
 	std::random_shuffle(positions, positions + width * heigth);
-	for(int i=0; i<v.size(); i++)
+	for(int i=0; i<(int)v.size(); i++)
 		v[i] = Particle(positions[i]%width, positions[i]/width, 0.f, 0.f);
 	delete[] positions;
 }
@@ -73,7 +74,7 @@ int main()
 				double rx = sf::Mouse::getPosition(window).x - p.getxpos();
 				double ry = sf::Mouse::getPosition(window).y - p.getypos();
 				double r = 8 * sqrt(rx*rx + ry*ry);
-				double b;
+				double b = 0;
 				if( r>255 )
 				{
 					b = r - 255;

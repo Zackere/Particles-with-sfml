@@ -9,7 +9,6 @@
 
 #include "particle.h"
 
-
 void initparticles(std::vector<Particle> &v, int width, int heigth)
 {
 	std::random_device rd;
@@ -39,8 +38,7 @@ std::pair<double, double> calculateforce(double x, double y, double center_x, do
 	double ry = center_y - y;
 	double mod = rx*rx + ry*ry;
 	double arg = 2 * atan(ry/(rx + sqrt(mod)));
-	mod = (double)1/cbrt(cbrt(cbrt(mod)));
-
+	mod = pow(mod,-0.037037);
 	return std::make_pair(cos(arg) * mod, sin(arg) * mod);
 }
 
@@ -53,11 +51,10 @@ void applyforce(std::vector<Particle> &v, double center_x, double center_y)
 			});
 }
 
-
 int main()
 {
 	int w_heigth=600, w_width=900;
-	int nparticles=1000;
+	int nparticles=500;
 
 	std::vector<Particle> vparticles(nparticles);
 	vparticles.shrink_to_fit();
@@ -73,7 +70,7 @@ int main()
 				double ry = sf::Mouse::getPosition(window).y - p.getypos();
 				double r = sqrt(rx*rx + ry*ry);
 				double b = 0;
-				if( r>255 )
+				if(r > 255)
 				{
 					b = r - 255;
 					b = (b>255?255:b);

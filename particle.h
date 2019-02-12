@@ -13,7 +13,7 @@ public:
 	kin_t getxvel() const { return x_vel; }
 	kin_t getyvel() const { return y_vel; }
 
-	void applyforce(kin_t x_for, kin_t y_for);
+	void applyforce(kin_t x_for, kin_t y_for, double dt);
 
 };
 

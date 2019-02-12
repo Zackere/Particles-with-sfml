@@ -38,7 +38,7 @@ std::pair<double, double> calculateforce(double x, double y, double center_x, do
 	double ry = center_y - y;
 	double mod = rx*rx + ry*ry;
 	double arg = 2 * atan(ry/(rx + sqrt(mod)));
-	mod = pow(mod,-0.037037) * 8;
+	mod = pow(mod,0.373737) * 4;
 	return std::make_pair(cos(arg) * mod, sin(arg) * mod);
 }
 
@@ -53,14 +53,16 @@ void applyforce(std::vector<Particle> &v, double center_x, double center_y, doub
 
 int main()
 {
-	int w_heigth=600, w_width=900;
-	int nparticles=500;
+	int w_heigth=900, w_width=1400;
+	int nparticles=10000;
 	sf::Clock clock;
+	sf::ContextSettings settings;
+    settings.antialiasingLevel = 8;
 	std::vector<Particle> vparticles(nparticles);
 	vparticles.shrink_to_fit();
 	initparticles(vparticles, w_width, w_heigth);
-	sf::RenderWindow window(sf::VideoMode(w_width,w_heigth), "Particles");
-	
+	sf::RenderWindow window(sf::VideoMode(w_width,w_heigth), "Particles", sf::Style::Default, settings);
+
 	clock.restart();
 	while(window.isOpen())
 	{
@@ -81,7 +83,7 @@ int main()
 		window.display();
 		sf::Event event;
 		while(window.pollEvent(event))
-			if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) 
+			if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
 				window.close();
 	}
 	return 0;

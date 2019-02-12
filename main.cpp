@@ -57,12 +57,11 @@ int main()
 	int nparticles=10000;
 	sf::Clock clock;
 	sf::ContextSettings settings;
-    settings.antialiasingLevel = 8;
+    	settings.antialiasingLevel = 8;
 	std::vector<Particle> vparticles(nparticles);
 	vparticles.shrink_to_fit();
 	initparticles(vparticles, w_width, w_heigth);
 	sf::RenderWindow window(sf::VideoMode(w_width,w_heigth), "Particles", sf::Style::Default, settings);
-
 	clock.restart();
 	while(window.isOpen())
 	{

@@ -25,7 +25,7 @@ void initparticles(std::vector<Particle> &v, int width, int heigth)
 void drawparticles(const std::vector<Particle> &v, sf::RenderWindow &w, std::function<sf::Color(const Particle&)> colorf)
 {
 	sf::CircleShape shape(1.f);
-	for_each(v.begin(), v.end(), [&](const Particle &p){
+	for_each(v.begin(), v.end(), [&shape, &w, &colorf](const Particle &p){
 			shape.setFillColor(colorf(p));
 			shape.setPosition(p.getxpos(), p.getypos());
 			w.draw(shape);
@@ -38,14 +38,14 @@ std::pair<double, double> calculateforce(double x, double y, double center_x, do
 	double ry = center_y - y;
 	double mod = rx*rx + ry*ry;
 	double arg = 2 * atan(ry/(rx + sqrt(mod)));
-	mod = pow(mod,-0.037037);
+	mod = pow(mod,-0.037037) * 8;
 	return std::make_pair(cos(arg) * mod, sin(arg) * mod);
 }
 
 void applyforce(std::vector<Particle> &v, double center_x, double center_y, double dt)
 {
 	std::pair<double, double> force;
-	for_each(v.begin(), v.end(), [&](Particle &p){
+	for_each(v.begin(), v.end(), [&dt, &center_x, &center_y, &force](Particle &p){
 			force = calculateforce(p.getxpos(), p.getypos(), center_x, center_y);
 			p.applyforce(force.first, force.second, dt);
 			});
@@ -56,16 +56,16 @@ int main()
 	int w_heigth=600, w_width=900;
 	int nparticles=500;
 	sf::Clock clock;
-	clock.restart();
 	std::vector<Particle> vparticles(nparticles);
 	vparticles.shrink_to_fit();
 	initparticles(vparticles, w_width, w_heigth);
-
 	sf::RenderWindow window(sf::VideoMode(w_width,w_heigth), "Particles");
+	
+	clock.restart();
 	while(window.isOpen())
 	{
 		applyforce(vparticles, sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y, clock.restart().asSeconds());
-		window.clear(sf::Color::Black);
+		window.clear();
 		drawparticles(vparticles, window, [&window](const Particle &p){
 				double rx = sf::Mouse::getPosition(window).x - p.getxpos();
 				double ry = sf::Mouse::getPosition(window).y - p.getypos();
